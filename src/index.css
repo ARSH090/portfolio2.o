@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+* {
+    cursor: none;
+}
+
+@media (hover:none) {
+    * {
+        cursor: auto;
+    }
+}
+
+html,
+body {
+    @apply bg-bg text-white font-sans antialiased;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(#00f0ff, #b14bff);
+    border-radius: 10px;
+}
+
+@layer components {
+    .glass {
+        @apply backdrop-blur-xl bg-white/[0.03] border border-white/10;
+    }
+    .glass-neon {
+        @apply backdrop-blur-xl bg-white/[0.03] border border-transparent relative rounded-2xl;
+        background-clip: padding-box;
+    }
+    .glass-neon::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1px;
+        background: linear-gradient(135deg, #00f0ff, #b14bff, #ff3cac);
+        mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+        -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+    }
+    .neon-text {
+        background: linear-gradient(90deg, #00f0ff, #b14bff, #ff3cac, #00f0ff);
+        background-size: 300% 100%;
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        @apply animate-gradient-x;
+    }
+    .btn-neon {
+        @apply relative inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm tracking-wide bg-gradient-to-r from-neon-cyan to-neon-purple text-black transition-all duration-300;
+    }
+    .btn-neon:hover {
+        @apply shadow-neon-strong scale-[1.03];
+    }
+    .btn-neon:active {
+        @apply scale-[0.98];
+    }
+    .btn-outline-neon {
+        @apply px-6 py-3 rounded-full font-semibold text-sm border border-white/15 text-white/90 transition-all duration-300;
+    }
+    .btn-outline-neon:hover {
+        @apply border-neon-cyan text-neon-cyan shadow-neon;
+    }
+}
+
+.grid-bg {
+    background-image: linear-gradient(rgba(0, 240, 255, .05) 1px, transparent 1px), linear-gradient(90deg, rgba(177, 75, 255, .05) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+}
